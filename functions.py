@@ -1,6 +1,11 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
 class exploratory_data_analysis:
     
-    def __init__(self, df):
+    def __init__(self, df: pd.DataFrame):
         self.df=df
         
     # data description using pandas library    
