@@ -3,7 +3,8 @@
 
 Este proyecto de Python tiene como objetivo desarrollar un sistema de clasificación de fraudes utilizando la técnica de regresión logística. El fraude representa una amenaza significativa en diversos sectores, como las transacciones financieras, el comercio electrónico y los seguros, entre otros. 
 
-Mediante el análisis exploratorio de datos y la implementación de la regresión logística en Python, se busca identificar patrones y características distintivas de los casos de fraude en la base de datos dada para poder detectar y prevenir eficazmente futuras instancias. El proyecto busca proporcionar una herramienta confiable y efectiva para mitigar los riesgos asociados al fraude, protegiendo así los recursos y mejorando la seguridad de las transacciones en general en la base de datos proporcionada.
+Mediante el análisis exploratorio de datos y la implementación de la regresión logística en Python, se busca identificar patrones y características distintivas de los casos de fraude en la base de datos dada para poder detectar y prevenir eficazmente futuras instancias. El proyecto busca proporcionar una herramienta confiable y efectiva para mitigar los riesgos asociados al fraude, protegiendo así los recursos y mejorando la seguridad de las transacciones en general en la base de datos proporcionada.  
+
 
 | Variable | Descripción                                            |
 |----------|--------------------------------------------------------|
