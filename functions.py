@@ -2,10 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
-from typing import Optional, List
+import statsmodels.api as sm
 from sklearn.metrics import classification_report
 from sklearn.metrics.cluster import contingency_matrix
 
+from typing import Optional, List
 sns.set_theme()
 
 
@@ -39,7 +40,7 @@ class exploratory_data_analysis:
     # make boxplots of numerical variables
     def boxplots(self):
 
-        cols = list(self.df.select_dtypes('float').columns)
+        cols = list(self.df.select_dtypes('float').columns)+ ["city_pop"]
         plt.figure(figsize=(15, 4))
 
         for i, col in enumerate(cols):
@@ -137,3 +138,68 @@ class logistic_class:
         print(classification_report(self.y_true, self.y_hat))
 
 
+class diagnosis:
+
+    def __init__(self, data, model, y, probas):
+        self.data = data
+        self.model = model
+        self.y = y
+        self.probs = probas
+
+    def residual_analysis(self):
+        residuals = self.y - self.probs
+        plt.figure(figsize=(15, 6))
+        plt.scatter(self.model.fittedvalues, residuals)
+        plt.axhline(np.std(residuals) * -2, label="$\pm 2 \sigma^2$", color='red', linestyle='--')
+        plt.axhline(0, linestyle='--', label="0", color="green")
+        plt.axhline(np.std(residuals) * 2, color='red', linestyle='--')
+        plt.xlabel("y_hat")
+        plt.ylabel("errors")
+        plt.title("Residual Analysis")
+        plt.legend()
+        plt.show();
+
+    def cook(self):
+        model_influence = self.model.get_influence()
+        distance = model_influence.cooks_distance[0]
+        p_value = model_influence.cooks_distance[1]
+
+        plt.figure(figsize=(15, 6))
+        plt.bar(range(1, len(self.data) + 1), distance, color="red")
+        plt.xticks(rotation=90)
+        plt.title("Leverage Analysis")
+        plt.xlabel("Observation")
+        plt.ylabel('Cooks Distance')
+        plt.show()
+
+    def distribution_prob(self, target_variable):
+        data = self.data.copy()
+        data['predicted_probs'] = self.probs
+        plt.figure(figsize=(15, 6))
+        sns.kdeplot(data=data, x='predicted_probs', hue=target_variable, fill=True)
+
+        # Agrega etiquetas y título al gráfico
+        plt.xlabel('Estimated Prob')
+        plt.ylabel('Density')
+        plt.title('Probability Distribution by category')
+
+        # Muestra el gráfico
+        plt.show();
+
+    def residual_deviance(self):
+        # Obtén los residuos deviance del modelo
+        residuals = self.model.resid_dev.copy()
+        plt.figure(figsize=(15, 6))
+        # Crea un gráfico de barras de residuos deviance
+        plt.bar(range(len(residuals)), residuals, color='red')
+
+        # Agrega una línea horizontal en y=0 para referencia
+        plt.axhline(y=0, color='r', linestyle='--')
+
+        # Agrega etiquetas y título al gráfico
+        plt.xlabel('Observation')
+        plt.ylabel('Residual Deviance')
+        plt.title('Residual Deviance Graphic')
+
+        # Muestra el gráfico
+        plt.show()
