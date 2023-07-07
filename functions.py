@@ -23,7 +23,7 @@ class exploratory_data_analysis:
     def rates(self, target_variable: Optional[str]):
         print(f"count of 0 cases:", (self.df[target_variable] == 0).sum())
         print("count 1 cases:", (self.df[target_variable] == 1).sum())
-        print("bankruptcie rate:", (self.df[target_variable] == 1).sum() / len(self.df) * 100, "%")
+        print(f"{target_variable} rate:", (self.df[target_variable] == 1).sum() / len(self.df) * 100, "%")
 
     # make correlation heatmap using sns
     def corr_heatmap(self):
