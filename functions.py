@@ -34,7 +34,7 @@ class exploratory_data_analysis:
         ax1.title.set_text("Heatmap with Pearson Correlation")
         sns.heatmap(self.df.corr("pearson"), annot=True, fmt='.2f', cmap='RdYlGn', ax=axes[0])
 
-        ax2.title.set_text("Heatmap with Spearman Correlation (For Bool  variables)")
+        ax2.title.set_text("Heatmap with Spearman Correlation (For Bool variables)")
         sns.heatmap(self.df.corr("spearman"), annot=True, fmt='.2f', cmap='Blues');
 
     # make boxplots of numerical variables
