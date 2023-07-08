@@ -38,14 +38,20 @@ class exploratory_data_analysis:
         sns.heatmap(self.df.corr("spearman"), annot=True, fmt='.2f', cmap='Blues');
 
     # make boxplots of numerical variables
-    def boxplots(self):
+    def boxplots(self, target_variable: Optional[str]=None):
+
+        data=self.df.copy()
+
+        if target_variable:
+            data=data[data["is_fraud"]==1]
+
 
         cols = list(self.df.select_dtypes('float').columns)+ ["city_pop"]
         plt.figure(figsize=(15, 4))
 
         for i, col in enumerate(cols):
             ax = plt.subplot(1, len(cols), i + 1)
-            sns.boxplot(data=self.df, x=col, ax=ax).set_title(col)
+            sns.boxplot(data=data, x=col, ax=ax).set_title(col)
 
     # count int variables
     def count_categorical(self, target_variable: Optional[str] = None):
