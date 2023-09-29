@@ -9,7 +9,6 @@ from sklearn.metrics.cluster import contingency_matrix
 from typing import Optional, List
 sns.set_theme()
 
-
 class exploratory_data_analysis:
 
     def __init__(self, df):

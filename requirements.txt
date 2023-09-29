@@ -9,3 +9,5 @@ scikit-learn==1.2.0
 scipy==1.9.3
 stats==0.1.2a0
 statsmodels==0.14.0
+
+
