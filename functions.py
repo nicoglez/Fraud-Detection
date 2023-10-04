@@ -116,8 +116,8 @@ class logistic_class:
         logit_model = sm.Logit(target, predictors)
         logit_result = logit_model.fit()
         print(logit_result.summary())
-        print()
-        print(f"G={2 * np.log(logit_result.llnull / logit_result.llf)}")
+        #print()
+        #print(f"G={2 * np.log(logit_result.llnull / logit_result.llf)}")
 
         # predictions
         y_hat = logit_result.predict(predictors)
